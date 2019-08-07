@@ -71,4 +71,3 @@ for single_post in all_posts:
     # Go to next post
     next_post = driver.find_element_by_class_name("coreSpriteRightPaginationArrow")
     next_post.click()
-
