@@ -1,73 +1,38 @@
+import os
 from selenium import webdriver
-
+import time
 # You need to download the google chrome driver https://sites.google.com/a/chromium.org/chromedriver/
-# Provide a path to the google chrome webdriver, thats the path you downloaded it to
-driver = webdriver.Chrome("/Users/ephraimkgwele/Desktop/pytest/chromedriver")
+# Put the ChromeDriver & The Bot in a folder.
+
+os.system("cls")
+username = input("Username: ")
+password = input("Password: ")
+
+driver = webdriver.Chrome()
 
 # The URL your script must visit
+time.sleep(2)
 driver.get("https://www.instagram.com/")
+time.sleep(2)
 
-# click the login with facebook button
-fb_login_btn = driver.find_element_by_class_name("sqdOP")
-fb_login_btn.click()
+User_Login = username
+user = driver.find_element_by_xpath('/html/body/div[1]/section/main/article/div[2]/div[1]/div[2]/form/div/div[1]/div/label/input')
+user.click()
+time.sleep(1)
+user.send_keys(User_Login)
 
-# Find the email and password fields
-email_input = driver.find_element_by_id("email")
-pass_input = driver.find_element_by_id("pass")
-cnt_submit = driver.find_element_by_id("loginbutton")
+time.sleep(2)
 
-# Fill in your login details to login
-# For the script to be able to login you need to supply your login details
-email_input.send_keys("YOUR FACEBOOK EMAIL HERE")
-pass_input.send_keys("YOUR FACEBOOK PASSWORD HERE")
+User_Pass = password
+passwrd = driver.find_element_by_xpath('/html/body/div[1]/section/main/article/div[2]/div[1]/div[2]/form/div/div[2]/div/label/input')
+passwrd.click()
+time.sleep(1)
+passwrd.send_keys(User_Pass)
 
-# Submit login form
-cnt_submit.click()
-
-# Wait for page to load everything
-driver.implicitly_wait(10)
-
-# Click not now on the instagram pop up
-notNow = driver.find_element_by_class_name("HoLwm")
-notNow.click()
-
-# Find the search box
-search_input = driver.find_element_by_class_name("x3qfX")
-
-# Enter my name in the search box
-search_input.send_keys("ephraim kgwele")
-
-# Wait for search results to load
-driver.implicitly_wait(10)
-
-# Follow link to my profile
-link = driver.find_element_by_xpath("//div[@class='fuqBx']/a[@href='/if_rhymes/']")
-link.click()
-
-# Click the follow button on my profile
-follow_btn = driver.find_element_by_xpath('//button[text()="Follow Back"]')
-follow_btn.click()
-
-# Open first post
-post_1 = driver.find_element_by_xpath("//a[@href='/p/BupNhJ9g494/']")
-post_1.click()
-
-# Find and Save all posts to a list
-
-all_posts = driver.find_elements_by_class_name("v1Nh3")
-
-# Loop though all the posts
-for single_post in all_posts:
-
-    # Wait for the post to load
-    driver.implicitly_wait(10)
-
-    # Like the post
-    like_post = driver.find_element_by_xpath("//span[@class='fr66n']")
-    like_post.click()
-
-    driver.implicitly_wait(10)
-
-    # Go to next post
-    next_post = driver.find_element_by_class_name("coreSpriteRightPaginationArrow")
-    next_post.click()
+time.sleep(2)
+# login button
+driver.find_element_by_xpath('/html/body/div[1]/section/main/article/div[2]/div[1]/div[2]/form/div/div[3]/button').click()
+time.sleep(4)
+# say no to save login.
+driver.find_element_by_xpath('/html/body/div[1]/section/main/div/div/div/div/button').click()
+time.sleep(3)
